@@ -48,7 +48,7 @@ class MinecraftVersionSensor(Entity):
     
     @property
     def state(self):
-        return self._state
+        return self._stateType
     
     @property
     def name(self):
