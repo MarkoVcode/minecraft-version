@@ -16,7 +16,7 @@ SCAN_INTERVAL = timedelta(minutes=20)
 
 DEFAULT_SCAN_INTERVAL = timedelta(minutes=20)
 DEFAULT_NAME = 'Minecraft Version'
-DEFAULT_STATE_TYPE = 'release'
+DEFAULT_STATE_TYPE = 'latest'
 ICON = 'mdi:minecraft'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
@@ -40,9 +40,16 @@ class MinecraftVersionSensor(Entity):
     def update(self):
         with urllib.request.urlopen('https://launchermeta.mojang.com/mc/game/version_manifest.json') as url:
             data = json.loads(url.read().decode())
+        
+        if (self._stateType == 'latest'):
+            self._state = data['versions'][0]['id']
+        elif (self._stateType == 'release' or self._stateType == 'snapshot'):
             self._state = data['latest'][self._stateType]
-            self._release = data['latest']['release']
-            self._snapshot = data['latest']['snapshot']
+        else:
+            self._state = 'Error'
+        
+        self._release = data['latest']['release']
+        self._snapshot = data['latest']['snapshot']
     
     @property
     def state(self):
