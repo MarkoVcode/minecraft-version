@@ -12,12 +12,12 @@ __version__ = '0.1.1'
 CONF_NAME = 'name'
 CONF_STATE_TYPE = 'state_type'
 
-SCAN_INTERVAL = timedelta(minutes=20)
-
-DEFAULT_SCAN_INTERVAL = timedelta(minutes=20)
 DEFAULT_NAME = 'Minecraft Version'
 DEFAULT_STATE_TYPE = 'latest'
 ICON = 'mdi:minecraft'
+
+SCAN_INTERVAL = timedelta(minutes=20)
+DEFAULT_SCAN_INTERVAL = timedelta(minutes=20)
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
