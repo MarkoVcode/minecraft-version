@@ -7,7 +7,7 @@ from homeassistant.helpers.entity import Entity
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.sensor import (PLATFORM_SCHEMA)
 
-__version__ = '0.0.1'
+__version__ = '0.1.1'
 
 CONF_NAME = 'name'
 CONF_STATE_TYPE = 'state_type'
