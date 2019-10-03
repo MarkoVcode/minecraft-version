@@ -1,7 +1,6 @@
 from datetime import timedelta
 import urllib.request, json
 
-import logging
 import voluptuous as vol
 
 from homeassistant.helpers.entity import Entity
@@ -9,7 +8,6 @@ import homeassistant.helpers.config_validation as cv
 from homeassistant.components.sensor import (PLATFORM_SCHEMA)
 
 __version__ = '0.0.1'
-_LOGGER = logging.getLogger(__name__)
 
 CONF_NAME = 'name'
 CONF_STATE_TYPE = 'state_type'
@@ -48,7 +46,7 @@ class MinecraftVersionSensor(Entity):
     
     @property
     def state(self):
-        return self._stateType
+        return self._state
     
     @property
     def name(self):
@@ -56,7 +54,7 @@ class MinecraftVersionSensor(Entity):
     
     @property
     def icon(self):
-        return self.ICON
+        return ICON
     
     @property
     def device_state_attributes(self):
