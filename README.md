@@ -11,8 +11,8 @@ sensor:
 
 ## Configuration variables:
   
-Field | Value | Necessity | Description
+Field | Default | Necessity | Description
 --- | --- | --- | ---
 platform | `minecraft_version` | *Required* | The platform name
-name | Minecraft Version | Optional | The name of your sensor
-state_type | **release** or **snapshot** | Optional | Type of version that will be displayed in the state of the sensor
+name | `Minecraft Version` | Optional | The name of your sensor
+state_type | `latest` | Optional | Type of version that will be displayed in the state of the sensor. **Types**: `latest`, `release`, `snapshot`
