@@ -7,21 +7,23 @@ from homeassistant.helpers.entity import Entity
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.sensor import (PLATFORM_SCHEMA)
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 CONF_NAME = 'name'
 CONF_STATE_TYPE = 'state_type'
 
-DEFAULT_NAME = 'Minecraft Version'
-DEFAULT_STATE_TYPE = 'latest'
-ICON = 'mdi:minecraft'
+TYPE_LATEST = 'latest'
+TYPE_RELEASE = 'release'
+TYPE_SNAPSHOT = 'snapshot'
+VALID_TYPES = [TYPE_LATEST, TYPE_RELEASE, TYPE_SNAPSHOT]
 
-SCAN_INTERVAL = timedelta(minutes=20)
+DEFAULT_NAME = 'Minecraft Version'
 DEFAULT_SCAN_INTERVAL = timedelta(minutes=20)
+SCAN_INTERVAL = timedelta(minutes=20)
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
-    vol.Optional(CONF_STATE_TYPE, default=DEFAULT_STATE_TYPE): cv.string
+    vol.Optional(CONF_STATE_TYPE, default=TYPE_LATEST): vol.In(VALID_TYPES)
 })
 
 def setup_platform(hass, config, add_devices, discovery_info=None):
@@ -41,9 +43,9 @@ class MinecraftVersionSensor(Entity):
         with urllib.request.urlopen('https://launchermeta.mojang.com/mc/game/version_manifest.json') as url:
             data = json.loads(url.read().decode())
         
-        if (self._stateType == 'latest'):
+        if (self._stateType == TYPE_LATEST):
             self._state = data['versions'][0]['id']
-        elif (self._stateType == 'release' or self._stateType == 'snapshot'):
+        elif (self._stateType == TYPE_RELEASE or self._stateType == TYPE_SNAPSHOT):
             self._state = data['latest'][self._stateType]
         else:
             self._state = 'Error'
@@ -61,7 +63,7 @@ class MinecraftVersionSensor(Entity):
     
     @property
     def icon(self):
-        return ICON
+        return 'mdi:minecraft'
     
     @property
     def device_state_attributes(self):
