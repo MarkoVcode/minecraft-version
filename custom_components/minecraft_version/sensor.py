@@ -34,9 +34,11 @@ class MinecraftVersionSensor(Entity):
         self.hass = hass
         self._name = config[CONF_NAME]
         self._stateType = config[CONF_STATE_TYPE]
+        self._state = None
+        self._latest_type = None
+        self._latest = None
         self._release = None
         self._snapshot = None
-        self._state = None
         self.update()
     
     def update(self):
@@ -50,6 +52,8 @@ class MinecraftVersionSensor(Entity):
         else:
             self._state = 'Error'
         
+        self._latest_type = data['versions'][0]['type']
+        self._latest = data['versions'][0]['id']
         self._release = data['latest']['release']
         self._snapshot = data['latest']['snapshot']
     
@@ -68,6 +72,8 @@ class MinecraftVersionSensor(Entity):
     @property
     def device_state_attributes(self):
         return {
+            'latest_type': self._latest_type,
+            'latest': self._latest,
             'release': self._release,
             'snapshot': self._snapshot
         }
