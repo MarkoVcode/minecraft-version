@@ -1,7 +1,7 @@
 {
-  "domain": "minecraft_version",
+  "domain": "minecraft-version",
   "name": "Minecraft Version",
-  "documentation": "https://github.com/xMrVizzy/Minecraft-Version",
+  "documentation": "https://github.com/xMrVizzy/minecraft-version",
   "dependencies": [],
   "codeowners": ["@xMrVizzy"],
   "requirements": []
