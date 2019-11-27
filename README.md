@@ -1,16 +1,10 @@
-# Minecraft-Version
-
-_Minecraft latest released version checker for Home Assistant!_
-
-## Usage:
-
+### Usage:
 ```yaml
 sensor:
   platform: minecraft_version
 ```
 
-## Configuration variables:
-  
+### Configuration variables:
 Field | Default | Necessity | Description
 --- | --- | --- | ---
 platform | `minecraft_version` | *Required* | The platform name
